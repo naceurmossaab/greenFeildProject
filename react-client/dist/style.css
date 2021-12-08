@@ -222,7 +222,7 @@ nav{
 }
 
 .fixed-div {
-     background-image: url("https://source.unsplash.com/1200x700/?city");
+     background-image: url('https://source.unsplash.com/1500x700/?city');
      width: 100%;
      padding: 0;
      margin: 0;
@@ -337,7 +337,124 @@ footer img{
      width: 50px;
 }
 
+/* Contact component */
 
+.contact-container{
+     display: flex;
+     justify-content: left;
+     margin-top: 4rem;
+     margin-left: 5rem;
+}
+
+.contact{
+     display: flex;
+     flex-direction: column;
+     margin: 3rem;
+     width: 50%;
+}
+.contact input{
+     font-size: 17px;
+     width: 350px;
+     height: 40px;
+     outline: none;
+     padding-left: 2.5rem;
+     margin: 0.5rem 0;
+     background-color: var(--navbar-bg);
+     border: none;
+     align-items: center;
+     border-radius: 7px;
+     
+}
+.contact textarea{
+     font-size: 17px;
+     margin : 0.5rem 0;
+     padding: 0.5rem;
+     background-color: var(--navbar-bg);
+     border: none;
+     border-radius: 7px;
+}
+.contact button{
+     margin: 0.5rem 0;
+     padding: 0 0.5rem;
+     font-size: 20px;
+     width: 100px;
+     height: 40px;
+     border: none;
+     color: #fff;
+     background-color: var(--search-btn);
+}
+.contact button:hover{
+     background-color: var(--search-btn-hover);
+}
+
+.right-div{
+     font-weight: 600;
+     color: #fff;
+     font-size: 20px;
+     top: 7rem;
+     right: 0;
+     position: absolute;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 10rem 2rem;
+     background-image: url('https://source.unsplash.com/700x300/?mail');
+     background-repeat: no-repeat;
+     background-size: cover;
+     width: 35vw;
+     height: 75vh;
+     clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+}
+
+/* login Component */
+
+.login{
+     display: flex;
+     justify-content: right;
+     margin-top: 4rem;
+     margin-left: 5rem;
+}
+
+.username-input{
+     background: url("https://img.icons8.com/ios/35/000000/name--v2.png") no-repeat scroll;
+}
+.name-input{
+     background: url("https://img.icons8.com/ios/35/000000/identity-theft.png") no-repeat scroll;
+}
+.email-input{
+     background: url("https://img.icons8.com/ios/35/000000/email-open.png") no-repeat scroll;
+}
+.type-input{
+     background: url("https://img.icons8.com/ios/35/000000/card-security.png") no-repeat scroll;
+}
+.password-input{
+     background: url("https://img.icons8.com/ios/35/000000/password.png") no-repeat scroll;
+}
+
+.left-div{
+     font-weight: 600;
+     color: #fff;
+     font-size: 20px;
+     top: 4rem;
+     left: 0;
+     position: absolute;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 10rem 2rem;
+     background-image: url('https://source.unsplash.com/1200x300/?house');
+     background-repeat: no-repeat;
+     background-size: cover;
+     width: 35vw;
+     height: calc(100vh - 4rem);
+}
+.left-div h1{
+     font-weight: 900;
+}
+
+.cursor-pointer{
+     cursor: pointer;
+}
 /* post style sheet */
 .postsContainer {
 	display: grid;
