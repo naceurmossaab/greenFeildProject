@@ -12,5 +12,5 @@ app.use(express.static(__dirname + "/../react-client/dist"));
 app.use("/api", router);
 
 app.listen(5000, function () {
-	console.log("listening on port 5000!");
+	console.log("listening on port http://localhost:5000 !");
 });
