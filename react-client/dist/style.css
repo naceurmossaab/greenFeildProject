@@ -526,3 +526,21 @@ footer img {
 .postDiscription {
 	grid-area: 2 / 1 / 3 / 3;
 }
+.userProfileContainer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+.inputContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.userProfilPic {
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+}
