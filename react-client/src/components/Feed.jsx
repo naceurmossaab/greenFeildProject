@@ -3,17 +3,14 @@ import Collapsible from "react-collapsible";
 import feed from "../../../dammyData/feedDAta.js";
 import axios from "axios";
 
-
 export default function Feed() {
   const [feeds, setFeeds] = useState(feed);
-  const [txt, setReply] = useState('');
-  useEffect(()=>{
-    axios.get('/feeds').then((res)=>{
-      console.log(res)
-      // setFeeds(res.data)
-    })
-  })
-
+  const [txt, setReply] = useState("");
+  useEffect(() => {
+    axios.get("/feeds").then((res) => {
+      setFeeds(res.data);
+    });
+  });
 
   return (
     <div>
@@ -26,7 +23,7 @@ export default function Feed() {
             onChange={(event) => setReply(event.value)}
             defaultValue={"reply to " + e.post.user}
           ></input>
-          <button >Reply</button>
+          <button>Reply</button>
           <Collapsible trigger="Replies">
             {e.replies.map((reply, index) => (
               <div key={index}>
