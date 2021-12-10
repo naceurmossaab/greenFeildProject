@@ -39,38 +39,46 @@ const AddPostOwner = (props) => {
 	const [price, setprice] = useState("");
 	const [description, setdescription] = useState("");
 	const [pics, setpics] = useState([]);
-	const uploadeImage = async (file, acc) => {
+	const uploadeImage = (file) => {
 		const formData = new FormData();
 		formData.append("file", file);
 		formData.append("upload_preset", "rgofaujc");
-		let data = await axios.post(
+		return axios.post(
 			"http://api.cloudinary.com/v1_1/geekitten/image/upload",
 			formData
 		);
 		// .then(({ data }) => acc.push(data.public_id))
 		// .catch((err) => console.log(err));
-		console.log(data.data.public_id);
-		acc.push(data.data.public_id);
+		// console.log(data.data.public_id);
+		// acc.push(data.data.public_id);
 	};
 	const handelSubmit = () => {
-		console.log(pics);
+		console.log("piiiiiiccsssss", pics[0]);
 		let image_id = [];
 		for (let i = 0; i < pics.length; i++) {
-			uploadeImage(pics[i], image_id);
+			image_id.push(uploadeImage(pics[i]));
 		}
-		let post = {
-			userId: props.user._id,
-			address: adresse,
-			numberOfRooms: numberOfRooms,
-			price: price,
-			description: description,
-			pictures: image_id,
-		};
-		console.log(image_id[0]);
-		// axios
-		// 	.post("/api/addOwnerPost", post)
-		// 	.then(({ data }) => console.log(data))
-		// 	.cath((err) => console.log(err));
+		let imagesCloudineryIds = [];
+		Promise.all(image_id)
+			.then((result) => {
+				imagesCloudineryIds = result.map((elem) => elem.data.public_id);
+			})
+			.then(() => {
+				let post = {
+					userId: props.user._id,
+					address: adresse,
+					numberOfRooms: numberOfRooms,
+					price: price,
+					description: description,
+					pictures: imagesCloudineryIds,
+				};
+				console.log(post);
+				// axios
+				// 	.post("/api/addOwnerPost", post)
+				// 	.then(({ data }) => console.log(data))
+				// 	.cath((err) => console.log(err));
+			})
+			.catch((err) => console.log(err));
 	};
 	return (
 		<div className='inputContainer'>
@@ -87,7 +95,8 @@ const AddPostOwner = (props) => {
 			></textarea>
 			<input
 				type='file'
-				onChange={(e) => setpics([...pics, e.target.files[0]])}
+				multiple
+				onChange={(e) => setpics(e.target.files)}
 			/>
 			<button onClick={handelSubmit}>Submit</button>
 		</div>
