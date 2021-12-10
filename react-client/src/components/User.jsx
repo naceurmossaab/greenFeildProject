@@ -37,7 +37,7 @@ const AddPostOwner = (props) => {
 	const [adresse, setadresse] = useState("");
 	const [numberOfRooms, setnumberOfRooms] = useState("");
 	const [price, setprice] = useState("");
-	const [discription, setdiscription] = useState("");
+	const [description, setdescription] = useState("");
 	const [pics, setpics] = useState([]);
 	const uploadeImage = async (file, acc) => {
 		const formData = new FormData();
@@ -63,8 +63,8 @@ const AddPostOwner = (props) => {
 			address: adresse,
 			numberOfRooms: numberOfRooms,
 			price: price,
-			discription: discription,
-			pics: image_id,
+			description: description,
+			pictures: image_id,
 		};
 		console.log(image_id[0]);
 		// axios
@@ -83,7 +83,7 @@ const AddPostOwner = (props) => {
 			<textarea
 				cols='30'
 				rows='10'
-				onChange={(e) => setdiscription(e.target.value)}
+				onChange={(e) => setdescription(e.target.value)}
 			></textarea>
 			<input
 				type='file'
