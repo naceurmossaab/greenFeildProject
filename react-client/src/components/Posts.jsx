@@ -8,7 +8,7 @@ const Posts = () => {
 
 	return (
 		<div>
-			<h4> List of Posts </h4>
+			{/* <h4> List of Posts </h4> */}
 			<div className='postsContainer'>
 				{postsList.map((post, i) => (
 					<Post post={post} key={i} />

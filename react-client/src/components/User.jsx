@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 
-export default class User extends Component {
-     constructor() {
-          super();
-     }
-
-     render() {
-          return (
-               <div>
-                    User component
-               </div>
-          )
-     }
+const User = (props) =>{
+     return (
+          <div>
+               User component
+          </div>
+     )
 }
+export default User;
