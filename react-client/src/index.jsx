@@ -15,7 +15,17 @@ const App = () =>{
 	// 	connect: false
 	// }
 	const [view, setView] = useState('home');
-	const [connect, setConnect] = useState(false);
+	const [connect, setConnect] = useState(false); // changed to true for testing user component
+
+	let user = {
+		_id: "1516845168135",
+		userName: "Khalil Hmazaoui",
+		email: "khalil_hamzaoui.gmail.com",
+		phoneNumber: 22556688,
+		categorie: "owner",
+		// categorie: "renter",
+		image: "https://images.unsplash.com/photo-1581599129568-e33151627628?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+	};
 
 	const viewRender = () => {
 		// console.log("view render : ", this.state.view);
@@ -24,7 +34,7 @@ const App = () =>{
 		else if (view === 'announces') return <Posts />
 		else if (view === 'contact') return <Contact />
 		else if (view === 'login' && !connect) return <Login />
-		else return <User />
+		else return <User user={user} />
 	}
 	return (
 		<div>
@@ -44,7 +54,8 @@ const App = () =>{
 
 				<div className="right">
 					<span onClick={() => setView('contact')}>Contact</span>
-					<span onClick={() => setView('login')}>Login</span>
+					{connect ? (<div className='navbar-logout' onClick={() => setView('login')}><img className='navbar-user' src={user.image} /> <span>Logout</span> </div>) : (<span onClick={() => setView('login')}>Login</span>)}
+				
 				</div>
 			</nav>
 
@@ -58,4 +69,4 @@ const App = () =>{
 }
 
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById('app'));
