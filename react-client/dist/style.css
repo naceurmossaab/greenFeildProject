@@ -97,9 +97,22 @@ nav{
      border: 1px solid var(--navbar-links-hover);
      width: 50%;
 }
-/* container section */
 
-/* .container{} */
+.navbar-logout{
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+     cursor: default;
+}
+.navbar-logout span{
+     padding-left: 0 !important;
+} 
+
+.navbar-user{
+     width : 25px;
+     height: 25px;
+     border-radius: 50%;
+}
 
 /* Accueil component */
 
@@ -170,7 +183,9 @@ nav{
      align-items: center;
 }
 
+/* Announce Component */
 /* last annouces home page style css sheet */
+
 .announce{
      width: 350px;
      display: flex;
@@ -277,7 +292,7 @@ nav{
      padding: 0.5rem 0;
 }
 
-/* testimonial css sheet */
+/* Testmonial Component */
 
 .testimonial{
      position: relative;
@@ -435,7 +450,7 @@ cite{
      clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
 }
 
-/* login Component */
+/* Login Component */
 
 .login{
      display: flex;
@@ -459,6 +474,19 @@ cite{
 .password-input{
      background: url("https://img.icons8.com/ios/35/000000/password.png") no-repeat scroll;
 }
+.adresse-input{
+     background: url("https://img.icons8.com/ios-filled/35/000000/address--v1.png") no-repeat scroll;
+}
+.room-input{
+     background: url("https://img.icons8.com/ios/35/000000/empty-bed.png") no-repeat scroll;
+}
+.price-input{
+     background: url("https://img.icons8.com/ios/35/000000/expensive-2--v1.png") no-repeat scroll;
+}
+.phone-input{
+     background: url("https://img.icons8.com/ios/35/000000/apple-phone.png") no-repeat scroll;
+}
+
 
 .left-div{
      font-weight: 600;
@@ -484,7 +512,9 @@ cite{
 .cursor-pointer{
      cursor: pointer;
 }
-/* post style sheet */
+
+/* Post Component */
+
 .postsContainer {
      margin: 2rem;
 	display: grid;
@@ -529,4 +559,42 @@ cite{
 }
 .postDiscription {
 	grid-area: 2 / 1 / 3 / 3;
+}
+
+/* User Component */
+
+.userProfileContainer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.profile{
+     width: 350px;
+     display: flex;
+     flex-direction: column;
+     border-right : 1px solid #888;
+     padding: 0 2rem;
+}
+
+.userDetails div{
+     display: flex;
+     align-items: center;
+}
+
+.userDetails span{
+     padding: 0.5rem;
+     margin: 0.2rem 0;
+}
+.userDetails span p{
+     padding-left: 2rem;
+}
+
+.userProfilPic {
+     margin: 1rem 0;
+	height: 180px;
+	width : 180px;
+	border-radius: 50%;
 }
