@@ -308,7 +308,6 @@ nav {
 	align-items: center;
 	flex-wrap: wrap;
 	width: 500px;
-	/* border: 1px solid red; */
 }
 
 #testimonials {
@@ -322,7 +321,7 @@ nav {
 }
 
 .single-testimonial p {
-	margin: 5rem 0;
+	margin: 3rem 0;
 }
 
 figure {
@@ -482,7 +481,7 @@ cite{
 .login {
 	display: flex;
 	justify-content: right;
-	margin-top: 4rem;
+	margin-top : 4rem;
 	margin-left: 5rem;
 }
 

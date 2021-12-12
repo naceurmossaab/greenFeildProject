@@ -22,12 +22,9 @@ const UserPofile = ({ user }) => (
 	<div className='profile'>
 		<img src={user.image} className='userProfilPic' />
 		<div className='userDetails'>
-			<div>{user.userName}</div>
-			<div>
-				<span>Phone Number </span>
-				{user.phoneNumber}
-			</div>
-			<div>Email {user.email}</div>
+			<div> <span className="name-input"> <p>{user.userName}   </p></span> </div>
+			<div> <span className="phone-input"><p>{user.phoneNumber}</p></span> </div>
+			<div> <span className="email-input"><p>{user.email}      </p></span> </div>
 			<Image cloudName='geekitten' public_id='kbtpnsfb2vkmzbskbp1n' />
 		</div>
 	</div>
@@ -81,23 +78,13 @@ const AddPostOwner = (props) => {
 			.catch((err) => console.log(err));
 	};
 	return (
-		<div className='inputContainer'>
-			<input type='text' onChange={(e) => setadresse(e.target.value)} />
-			<input
-				type='text'
-				onChange={(e) => setnumberOfRooms(e.target.value)}
-			/>
-			<input type='text' onChange={(e) => setprice(e.target.value)} />
-			<textarea
-				cols='30'
-				rows='10'
-				onChange={(e) => setdescription(e.target.value)}
-			></textarea>
-			<input
-				type='file'
-				multiple
-				onChange={(e) => setpics(e.target.files)}
-			/>
+		<div className='inputContainer contact'>
+			<input className="adresse-input" placeholder="adresse" type='text'         onChange={(e) => setadresse(e.target.value)} />
+			<input className="room-input"    placeholder="number of rooms" type='text' onChange={(e) => setnumberOfRooms(e.target.value)} />
+			<input className="price-input"   placeholder="price"           type='text' onChange={(e) => setprice(e.target.value)} />
+			<textarea cols='34' rows='10' onChange={(e) => setdescription(e.target.value)}>
+			</textarea>
+			<input type='file' multiple onChange={(e) => setpics(e.target.files)}	/>
 			<button onClick={handelSubmit}>Submit</button>
 		</div>
 	);
@@ -115,12 +102,9 @@ const AddPostRenter = (props) => {
 		// 	.cath((err) => console.log(err));
 	};
 	return (
-		<div className='inputContainer'>
+		<div className='inputContainer contact'>
 			<input type='text' onChange={(e) => settitle(e.target.value)} />
-			<textarea
-				cols='30'
-				rows='10'
-				onChange={(e) => setbody(e.target.value)}
+			<textarea className="name-input" cols='34' rows='10' placeholder="title" onChange={(e) => setbody(e.target.value)}
 			></textarea>
 			<button onClick={handelSubmit}>Submit</button>
 		</div>
