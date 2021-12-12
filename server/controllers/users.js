@@ -16,11 +16,9 @@ module.exports = {
             // the server will try the following
             const users = await User
                                 .find({})
-                                .populate(["renterPosts","ownerPosts"]);
+                                .populate(["renterPosts","ownerPosts"])
+                                .select('-password')
 
-            // Success
-            console.log("Server Response: ");
-            console.log("Found users: ", users, "\n");
             res.status(200).json(users);
         } catch (error) {
             next(error);
@@ -28,7 +26,7 @@ module.exports = {
     },
     create_A_New_One: async (req, res, next) => { // ONLY USED BY ADMIN !!!!!
         // the admin will be able to create a new user, but the password will be generated randomly then hashed
-        try {
+        /* try {
             console.log("\nRequesting the server to save user into the database ...\n");
 
             let newUser = req.body;
@@ -38,14 +36,11 @@ module.exports = {
             // https://mongoosejs.com/docs/models.html#constructing-documents
             const savedUser = await User.create(newUser);
 
-            // Success
-            console.log("Server Response: ");
-            console.log("Saved user: ", savedUser, "\n");
             res.status(201).json(savedUser);
         } catch (error) {
             res.status(201).json(error); // must send to the user that the username is already taken
             // next(error);
-        }
+        } */
     },
     find_One: async (req, res, next) => {
         try {
@@ -53,11 +48,8 @@ module.exports = {
             // the server will try the following
             const foundUser = await User
                                     .findById(req.params.userId)
-                                    .populate(["renterPosts","ownerPosts"]);
-
-            // Success
-            console.log("Server Response: ");
-            console.log("Found user: ", foundUser, "\n");
+                                    .populate(["renterPosts","ownerPosts"])
+                                    .select('-password')
 
             res.status(200).json(foundUser);
         } catch (error) {
@@ -68,14 +60,11 @@ module.exports = {
         try {
             console.log("\nRequesting the server to update a specific user into the database ...\n");
             // the server will try the following
-            const user = await User.findByIdAndUpdate(
-                req.params.userId,
-                req.body,
-                { new: true }
-            ).populate(["renterPosts","ownerPosts"])
-            // Success
-            console.log("Server Response: ");
-            console.log("Updated user: ", user, "\n");
+            const user = await User
+                                .findByIdAndUpdate( req.params.userId, req.body, { new: true })
+                                .populate(["renterPosts","ownerPosts"])
+                                .select('-password')
+
             res.status(200).json(user)
         } catch (error) {
             next(error);
@@ -85,26 +74,19 @@ module.exports = {
         try {
             console.log("\nRequesting the server to delete a specific user from the database ...\n");
             // the server will try the following
-            const removedUser = await User.findByIdAndRemove(req.params.userId).populate(["renterPosts","ownerPosts"])
-
-            // Success
-            console.log("Server Response: ")
-            console.log("Removed user: ", removedUser, "\n")
+            const removedUser = await User
+                                        .findByIdAndRemove(req.params.userId)
+                                        .populate(["renterPosts","ownerPosts"])
+                                        .select('-password')
 
             let removedOwnerPost;
             for(let ownerPost of removedUser.ownerPosts){
-                removedOwnerPost = await OwnerPost.findByIdAndRemove(ownerPost._id)
-
-                console.log("Server Response: ")
-                console.log("Removed ownerPost: ", removedOwnerPost, "\n")
+                removedOwnerPost = await OwnerPost.findByIdAndRemove(ownerPost._id).select('-password') /// work ???
             }
 
             let removedRenterPost;
             for(let renterPost of removedUser.renterPosts){
-                removedRenterPost = await RenterPost.findByIdAndRemove(renterPost._id)
-
-                console.log("Server Response: ")
-                console.log("Removed renterPost: ", removedRenterPost, "\n")
+                removedRenterPost = await RenterPost.findByIdAndRemove(renterPost._id).select('-password') /// work ???
             }
 
             res.status(200).json(removedUser)
@@ -116,10 +98,11 @@ module.exports = {
         try {
             console.log("\nRequesting the server to find all ownerPosts of a specific user from the database ...\n");
             // the server will try the following
-            const user = await User.findById(req.params.userId).populate("ownerPosts");
-            // Success
-            console.log("Server Response: ");
-            console.log("Found ownerPosts: ", user.ownerPosts, "\n");
+            const user = await User
+                                .findById(req.params.userId)
+                                .populate("ownerPosts")
+                                .select('-password')
+
             res.status(200).json(user.ownerPosts);
         } catch (error) {
             next(error);
@@ -138,17 +121,11 @@ module.exports = {
             console.log("\nRequesting the server to create and save a new ownerPost, of a specific user, inside the database ...\n");
             // the server will try the following:
             // Step 1: Find the user
-            const foundUser = await User.findById(userId);
+            const foundUser = await User.findById(userId)
 
-            // Success:
-            console.log("Server Response: ");
-            console.log("user: ", foundUser, "\n");
-
+            
             // Create a new ownerPost into a database
-            const newOwnerPost = await OwnerPost.create(ownerPost);
-
-            console.log("Server Response: ");
-            console.log("newOwnerPost: ", newOwnerPost, "\n");
+            const newOwnerPost = await OwnerPost.create(ownerPost)
 
             // Add the found user to the newOwnerPost
             // update the user, by pushing newOwnerPost._id (the id object, and not the string id) to ownerPosts array
@@ -156,20 +133,17 @@ module.exports = {
                 foundUser?._id,
                 { $push: { ownerPosts: newOwnerPost?._id } },
                 { new: true }
-            ).populate(["ownerPosts","renterPosts"]);
-
-            console.log("Server Response: ");
-            console.log("updatedUser: ", updatedUser, "\n");
+            )
+            .populate(["ownerPosts","renterPosts"])
 
             // update the OwnerPost by setting the foundUser._id  (the id object, and not the string id) to user attribute
             let updatedOwnerPost = await OwnerPost.findByIdAndUpdate(
                 newOwnerPost?._id,
                 { user: foundUser._id },
                 { new: true }
-            ).populate("user");
+            )
+            .populate({path:"user",select:"-password"})
 
-            console.log("Server Response: ");
-            console.log("updatedOwnerPost: ", updatedOwnerPost, "\n");
 
             res.status(201).json(updatedOwnerPost);
         } catch (error) {
@@ -183,25 +157,20 @@ module.exports = {
             const foundUser = await User
                                     .findById(req.params.userId)
                                     .populate(["renterPosts","ownerPosts"])
+                                    .select('-password')
 
-            console.log("Server Response: ")
-            console.log("Found user: ", foundUser, "\n")
 
             let removedOwnerPost, updatedUser
-            for(let ownerPost of removedUser.ownerPosts){
+            for(let ownerPost of foundUser.ownerPosts){
                 removedOwnerPost = await OwnerPost.findByIdAndRemove(ownerPost._id)
-
-                console.log("Server Response: ")
-                console.log("Removed ownerPost: ", removedOwnerPost, "\n")
 
                 updatedUser = await User.findByIdAndUpdate(
                     foundUser?._id,
                     { $pull: { ownerPosts: removedOwnerPost?._id } },
                     { new: true }
-                ).populate("renterPosts"); // no need to populate with ownerPosts since all of them are removed
-
-                console.log("Server Response: ");
-                console.log("Updated updatedUser: ", updatedUser, "\n");
+                )
+                .populate("renterPosts") // no need to populate with ownerPosts since all of them are removed
+                .select('-password')
             }
 
             res.status(201).json(updatedUser)
@@ -216,15 +185,11 @@ module.exports = {
             const foundUser = await User
                                     .findById(req.params.userId)
                                     .populate(["renterPosts","ownerPosts"])
+                                    .select('-password')
 
-            console.log("Server Response: ")
-            console.log("Found user: ", foundUser, "\n")
-
-            let foundOwnerPost = await OwnerPost.findById(req.params.ownerpostId)
-
-            console.log("Server Response: ")
-            console.log("Found ownerPost: ", foundOwnerPost, "\n")
-
+            let foundOwnerPost = await OwnerPost
+                                            .findById(req.params.ownerpostId)
+                                            .select('-password')
 
             res.status(200).json(foundOwnerPost)
         } catch (error) {
@@ -238,14 +203,11 @@ module.exports = {
             const foundUser = await User
                                     .findById(req.params.userId)
                                     .populate(["renterPosts","ownerPosts"])
+                                    .select('-password')
 
-            console.log("Server Response: ")
-            console.log("Found user: ", foundUser, "\n")
-
-            let updatedOwnerPost = await OwnerPost.findByIdAndUpdate(req.params.ownerpostId)
-
-            console.log("Server Response: ")
-            console.log("Updated ownerPost: ", updatedOwnerPost, "\n")
+            let updatedOwnerPost = await OwnerPost
+                                            .findByIdAndUpdate(req.params.ownerpostId, req.body, {new: true})
+                                            .populate({ path:"user", select: "-password" })
 
             res.status(201).json(updatedOwnerPost)
         } catch (error) {
@@ -260,22 +222,16 @@ module.exports = {
                                     .findById(req.params.userId)
                                     .populate(["renterPosts","ownerPosts"])
 
-            console.log("Server Response: ")
-            console.log("Found user: ", foundUser, "\n")
-
-            let removedOwnerPost = await OwnerPost.findByIdAndRemove(req.params.ownerpostId)
-
-            console.log("Server Response: ")
-            console.log("Removed ownerPost: ", removedOwnerPost, "\n")
+            let removedOwnerPost = await OwnerPost
+                                            .findByIdAndRemove(req.params.ownerpostId)
 
             updatedUser = await User.findByIdAndUpdate(
                 foundUser?._id,
                 { $pull: { ownerPosts: removedOwnerPost?._id } },
                 { new: true }
-            ).populate(["ownerPosts","renterPosts"]);
-
-            console.log("Server Response: ");
-            console.log("Updated updatedUser: ", updatedUser, "\n");
+            )
+            .populate(["ownerPosts","renterPosts"])
+            .select('-password')
 
             res.status(200).json(updatedUser)
         } catch (error) {
@@ -286,10 +242,11 @@ module.exports = {
         try {
             console.log("\nRequesting the server to find all renterPosts, of a specific user, from the database ...\n");
             // the server will try the following
-            const user = await User.findById(req.params.userId).populate("renterPosts")
-            // Success
-            console.log("Server Response: ");
-            console.log("Found ownerPosts: ", user.ownerPosts, "\n");
+            const user = await User
+                                .findById(req.params.userId)
+                                .populate("renterPosts") /////////////////
+                                .select('-password')
+
             res.status(200).json(user.renterPosts);
         } catch (error) {
             next(error);
@@ -308,17 +265,13 @@ module.exports = {
             console.log("\nRequesting the server to save and create a new renterPost, of a specific user, inside the database ...\n");
             // the server will try the following:
             // Step 1: Find the user
-            const foundUser = await User.findById(userId);
+            const foundUser = await User
+                                    .findById(userId)
+                                    .select('-password')
 
-            // Success:
-            console.log("Server Response: ");
-            console.log("foundUser: ", foundUser, "\n");
 
             // Create a new ownerPost into a database
-            const newRenterPost = await RenterPost.create(renterPost);
-
-            console.log("Server Response: ");
-            console.log("newRenterPost: ", newRenterPost, "\n");
+            const newRenterPost = await RenterPost.create(renterPost)
 
             // Add the found user to the newOwnerPost
             // update the user, by pushing newOwnerPost._id (the id object, and not the string id) to ownerPosts array
@@ -326,20 +279,17 @@ module.exports = {
                 foundUser?._id,
                 { $push: { renterPosts: newRenterPost?._id } },
                 { new: true }
-            ).populate(["renterPosts", "ownerPosts"]);
-
-            console.log("Server Response: ");
-            console.log("updatedUser: ", updatedUser, "\n");
+            )
+            .populate(["renterPosts", "ownerPosts"])
+            .select('-password')
 
             // update the OwnerPost by setting the foundUser._id  (the id object, and not the string id) to user attribute
             let updatedRenterPost = await RenterPost.findByIdAndUpdate(
                 newRenterPost?._id,
                 { user: foundUser?._id },
                 { new: true }
-            ).populate("user");
-
-            console.log("Server Response: ");
-            console.log("updatedRenterPost: ", updatedRenterPost, "\n");
+            )
+            .populate({ path:"user", select: "-password" })
 
             res.status(201).json(updatedRenterPost);
         } catch (error) {
@@ -350,26 +300,24 @@ module.exports = {
         try {
             console.log("\nRequesting the server to delete all renterPosts, of a specific user, from the database ...\n");
             // the server will try the following
-            const foundUser = await User.findById(req.params.userId).populate(["renterPosts","ownerPosts"])
-
-            console.log("Server Response: ")
-            console.log("Found user: ", foundUser, "\n")
+            const foundUser = await User
+                                    .findById(req.params.userId)
+                                    .populate(["renterPosts","ownerPosts"])
+                                    .select('-password')
 
             let removedRenterPost, updatedUser;
-            for(let renterPost of removedUser.renterPosts){
-                removedRenterPost = await RenterPost.findByIdAndRemove(renterPost._id)
-
-                console.log("Server Response: ")
-                console.log("Removed renterPost: ", removedRenterPost, "\n")
+            for(let renterPost of foundUser.renterPosts){
+                removedRenterPost = await RenterPost
+                                            .findByIdAndRemove(renterPost._id)
+                                            .select('-password')
 
                 updatedUser = await User.findByIdAndUpdate(
                     foundUser?._id,
                     { $pull: { renterPosts: removedRenterPost?._id } },
                     { new: true }
-                ).populate("ownerPosts");  // no need to populate with renterPosts since all of them are removed
-
-                console.log("Server Response: ");
-                console.log("Updated updatedUser: ", updatedUser, "\n");
+                )
+                .populate("ownerPosts")  // no need to populate with renterPosts since all of them are removed
+                .select('-password')
             }
 
             res.status(200).json(updatedUser)
@@ -384,14 +332,11 @@ module.exports = {
             const foundUser = await User
                                     .findById(req.params.userId)
                                     .populate(["renterPosts","ownerPosts"])
+                                    .select('-password')
 
-            console.log("Server Response: ")
-            console.log("Found user: ", foundUser, "\n")
-
-            let foundRenterPost = await RenterPost.findById(req.params.renterpostId)
-
-            console.log("Server Response: ")
-            console.log("Found renterPost: ", foundRenterPost, "\n")
+            let foundRenterPost = await RenterPost
+                                            .findById(req.params.renterpostId)
+                                            .select('-password')
 
             res.status(200).json(foundRenterPost)
         } catch (error) {
@@ -407,17 +352,13 @@ module.exports = {
                                     .findById(req.params.userId)
                                     .populate(["renterPosts","ownerPosts"])
 
-            console.log("Server Response: ")
-            console.log("Found user: ", foundUser, "\n")
-
             let updatedRenterPost = await RenterPost.findByIdAndUpdate(
                 req.params.renterpostId,
                 newRenterPost,
                 { new: true }
             )
-
-            console.log("Server Response: ")
-            console.log("Updated renterPost: ", updatedRenterPost, "\n")
+            .populate(["renterPosts","ownerPosts"])
+            .select('-password')
 
             res.status(201).json(updatedRenterPost)
         } catch (error) {
@@ -428,24 +369,20 @@ module.exports = {
         try {
             console.log("\nRequesting the server to remove all renterPosts, of a specific user, from the database ...\n");
             // the server will try the following
-            const foundUser = await User.findById(req.params.userId).populate(["renterPosts","ownerPosts"])
+            const foundUser = await User
+                                    .findById(req.params.userId)
+                                    .populate(["renterPosts","ownerPosts"])
 
-            console.log("Server Response: ")
-            console.log("Found user: ", foundUser, "\n")
-
-            let removedRenterPost = await RenterPost.findByIdAndRemove(req.params.renterpostId)
-
-            console.log("Server Response: ")
-            console.log("Removed renterPost: ", removedRenterPost, "\n")
+            let removedRenterPost = await RenterPost
+                                            .findByIdAndRemove(req.params.renterpostId)
 
             updatedUser = await User.findByIdAndUpdate(
                 foundUser?._id,
                 { $pull: { renterPosts: removedRenterPost?._id } },
                 { new: true }
-            ).populate("renterPosts");
-
-            console.log("Server Response: ");
-            console.log("Updated updatedUser: ", updatedUser, "\n");
+            )
+            .populate("renterPosts")
+            .select('-password')
 
             res.status(201).json(updatedUser)
         } catch (error) {
