@@ -4,17 +4,28 @@ import feed from "../../../dammyData/feedDAta.js";
 import axios from "axios";
 import $ from "jquery";
 import regions from "../../../dammyData/Regions.js";
-export default function Feed() {
+
+export default function Feed(props) {
   const [feeds, setFeeds] = useState(feed);
   const [txt, setReply] = useState("");
+  const[newpost,setpost]=useState({content:txt,user:props.user});
+  const[userselectedpost,setselectedpost]=useState('')
   const [cities, setCities] = useState([]);
   const [Cities, setcities] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get("/feeds").then((res) => {
-  //     setFeeds(res.data);
-  //   });
-  // });
+  useEffect(() => {
+    axios.get("/api/renterposts").then((res) => {
+      console.log(res.data)
+      setFeeds(res.data);
+    });
+
+    // axios.post("/users/:userId/renterposts/",newpost).then((res) => {
+    //   console.log(res)
+    // });
+    // axios.post("/users/:userId/renterposts/:renterpostId/comments",{newpost,userselectedpost}).then((res) => {
+    //  console.log(res)
+    // });
+  });
 
   function addPost() {
     $(".Post").toggle();
@@ -25,7 +36,7 @@ export default function Feed() {
         <div className="creat-post-head">
           <select
             id="state"
-            onChange={(event) => setCities(regions[$("#state").val()].cities)}
+            onChange={(event) => setCities(regions[event.target.value].cities)}
           >
             <option>Select the state</option>
             {regions.map((region, index) => (
@@ -71,7 +82,7 @@ export default function Feed() {
             className="create-body-textarea"
             placeholder="your post here.."
           ></textarea>
-          <button>Post</button>
+          <button >Post</button>
         </div>
       </div>
       {feeds.map((e, i) => (
@@ -86,7 +97,7 @@ export default function Feed() {
                 onChange={(event) => setReply(event.value)}
                 defaultValue={"reply to " + e.post.user}
               ></input>
-              <button>Post the comment</button>
+              <button >Post the comment</button>
             </div>
           </Collapsible>
           <Collapsible trigger="Replies">
