@@ -23,21 +23,24 @@ export default function Feed() {
 
   return (
     <div>
-      <select id='state' onChange={(event)=>setCities(regions[$('#state').val()].cities)}>
-      <option value='...' >...</option>
+      <select id='state' onChange={(event)=>setCities(regions[$('#state').val()].cities)} >
+      <option  >Select the state</option>
        {regions.map((region,index)=>(
          <option id={region.state} value={index} key={index}>{region.state}</option>
        ))
        }
       </select>
       <select >
+      <option  >Select the city</option>
       {cities.map((city,index)=>(
          <option  value={city} key={index}>{city}</option>
        ))
        }
       </select>
-      
+      <button >Search</button>
+      <div>
       <button onClick={() => addPost()}>Create a post +</button>
+      </div>
       <div className="Post" style={{ display: "none" }}>
         <input placeholder="region"></input>
         <textarea
@@ -51,14 +54,16 @@ export default function Feed() {
           <h3>{e.post.user}</h3>
           <p>{e.post.text}</p>
           <p>{e.post.createdAt}</p>
-          <button onClick={() => writeReply()}>Comment</button>
-          <div className="show" style={{ display: "none" }}>
+          {/* <button onClick={() => writeReply()}>Comment</button> */}
+          <Collapsible trigger='Comment'>
+          <div >
             <input
               onChange={(event) => setReply(event.value)}
               defaultValue={"reply to " + e.post.user}
             ></input>
             <button>Post the comment</button>
           </div>
+          </Collapsible>
           <Collapsible trigger="Replies">
             {e.replies.map((reply, index) => (
               <div key={index}>
