@@ -6,7 +6,7 @@ const ownerPostSchema = mongoose.Schema(
         adress: { type: String, default: "Not Specified" },
         description: { type: String, default: "Not Specified" },
         numberOfRooms: { type: Number, default: 1 },
-        pictures: [{ type: Number, default: "" }],
+        pictures: [{ type: String, default: "" }],
         price: { type: Number, default: 0 },
         user: {
             type: mongoose.Schema.Types.ObjectId,
