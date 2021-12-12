@@ -30,13 +30,13 @@ export default function Feed() {
             <option value='...' >...</option>
             {regions.map((region, index) => (
               <option id={region.state} value={index} key={index}>{region.state}</option>
-              ))
+            ))
             }
           </select>
           <select >
             {cities.map((city, index) => (
               <option value={city} key={index}>{city}</option>
-              ))
+            ))
             }
           </select>
           <button onClick={() => addPost()}>Create a post +</button>
@@ -49,7 +49,7 @@ export default function Feed() {
             </textarea>
             <button>Post</button>
           </div>
-        </div>  
+        </div>
       </div>
       {/* feed posts */}
       <div className="feed-container">
@@ -79,6 +79,7 @@ export default function Feed() {
           </div>
         ))}
       </div>
-    </div>
-  );
+    </div> 
+    );
+
 }
