@@ -15,7 +15,7 @@ const App = () =>{
 	// 	connect: false
 	// }
 	const [view, setView] = useState('home');
-	const [connect, setConnect] = useState(true); // changed to true for testing user component
+	const [connect, setConnect] = useState(false); // changed to true for testing user component
 
 	let user = {
 		_id: "1516845168135",

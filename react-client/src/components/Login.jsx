@@ -35,7 +35,7 @@ const Login = () => {
 
     const signupFN = () => {
         console.log("signup ", signup);
-        axios.post('/signup', signup)
+        axios.post('/auth/signup', signup)
             .then(({ data }) => {
                 setSignup({
                     username: "",
@@ -52,7 +52,7 @@ const Login = () => {
 
     const signinFN = () => {
         console.log("signin ", signin);
-        axios.post('/signin', signin)
+        axios.post('/auth/signin', signin)
             .then(({ data }) => {
                 console.log("login response : ", data);
                 // if (Array.isArray(data)) this.props.account(data[0]);
