@@ -180,10 +180,10 @@ nav {
 }
 
 .announces-container {
-	padding: 1rem 0;
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
+	padding: 1rem 3rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	gap: 1rem;
 }
 
 /* Announce Component */
@@ -208,11 +208,16 @@ nav {
 
 .gallery {
 	display: grid;
+	gap: .1rem;
 	grid-template-columns: repeat(2, 1fr);
 	height: 150px;
 	width: 150px;
 	background-color: rgba(255, 255, 255, 0.8);
-	margin: 0.5rem 0;
+	margin-top: 0.5rem;
+}
+.gallery img{
+	width : 150px;
+	height: 100px;
 }
 
 .img {
@@ -221,14 +226,33 @@ nav {
 	grid-row-start: 1;
 	grid-row-end: 3;
 }
+
 .others {
 	grid-row-start: 3;
+}
+.others img{
+	width : 75px;
+	height: 50px;
 }
 
 .details {
 	padding: 1rem 0.5rem;
 	display: flex;
 	flex-direction: column;
+}
+.details button{
+     font-weight: 500;
+     border: none;
+     outline: none;
+     background-color: transparent;
+     border: 2px solid #E5F0FF;
+     /* border-right : 1px solid #E5F0FF; */
+     margin: 0.5rem 0;
+     padding: 0.2rem 0.3rem;
+     border-radius: 5px;
+}
+.details button:hover{
+     background-color: #E5F0FF;
 }
 
 .description {
