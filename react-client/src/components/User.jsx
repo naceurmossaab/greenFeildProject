@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
+import ReactDom from "react-dom";
+
 import { Image } from "cloudinary-react";
 
 const User = (props) => {
@@ -14,9 +16,86 @@ const User = (props) => {
 			<UserPofile user={props.user} />
 			{userInput}
 			{/* user Posts List with delete and update options  */}
+			<Post_R post={post} />
 		</div>
 	);
 };
+
+///////////////////// post popUptest //////////////
+
+//******** */
+let post = {
+	numberOfRooms: "S+2",
+	discription:
+		"Situé à Tunis, à 1 km de la plage de Salambo, l'établissement Un emplacement exceptionnel propose un hébergement avec un jardin, une connexion Wi-Fi gratuite, une réception ouverte 24h/24 et un distributeur automatique de billets. Construit en 2019, il propose des hébergements climatisés avec balcon.",
+	address: "Salambo,",
+	price: "700 TND per monthe",
+	pictures: [
+		"https://cf.bstatic.com/xdata/images/hotel/max1024x768/270789232.jpg?k=106782d5133e377d68fee52d689e2f938d945f91a096cec1bfafaf1435759e6f&o=&hp=1",
+		"https://cf.bstatic.com/xdata/images/hotel/max1024x768/270789963.jpg?k=bdaa848b3fba38f5b7706de68a130e5b829fce7ba001c0d98ece349751839b89&o=&hp=1",
+		"https://cf.bstatic.com/xdata/images/hotel/max1280x900/270789227.jpg?k=776ed179df7d34802e71ca86fe174e8f120d021eace26891b67673a8a2f40ebb&o=&hp=1",
+		"https://cf.bstatic.com/xdata/images/hotel/max1024x768/270789242.jpg?k=53bea9785875259eeff089701295534ab0f948b48616a085ff90a7f4f7758022&o=&hp=1",
+	],
+};
+//////***** */
+const Post_R = ({ post }) => {
+	const [slideShow, setSlideShow] = useState(false);
+	let modelStyle = {
+		psition: "fixed",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%,-50%)",
+		paddind: "50px",
+		zIndex: 1000,
+		border: "solid",
+		backgroundColor: "rgba(0,0,0,.2)",
+	};
+
+	let overLayStyle = {
+		position: "fixed",
+		rop: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		backgroundColor: "rgba(0,0,0,.2)",
+		zIndex: 1000,
+	};
+	return !slideShow ? (
+		<div className='postCard'>
+			<div className='postImg'>
+				<div onClick={() => setSlideShow(true)}>
+					<img src={post.pictures[0]} />
+				</div>
+				<div onClick={() => setSlideShow(true)}>
+					<img src={post.pictures[1]} />
+				</div>
+				<div onClick={() => setSlideShow(true)}>
+					<img src={post.pictures[2]} />
+				</div>
+				<div onClick={() => setSlideShow(true)}>
+					<img src={post.pictures[3]} />
+				</div>
+			</div>
+			<div className='postDetails'>
+				<div>{post.address}</div>
+				<div>{post.numberOfRooms}</div>
+				<div>{post.price}</div>
+			</div>
+			<div className='postDiscription'>{post.discription}</div>
+		</div>
+	) : (
+		ReactDom.createPortal(
+			<div style={modelStyle}>
+				<div>
+					<h1>SlideShow</h1>
+					<button onClick={() => setSlideShow(false)}>Close</button>
+				</div>
+			</div>,
+			document.getElementById("modele")
+		)
+	);
+};
+////////////////////////////////////////:::::::::::
 
 const UserPofile = ({ user }) => (
 	<div className='profile'>
@@ -28,7 +107,6 @@ const UserPofile = ({ user }) => (
 				{user.phoneNumber}
 			</div>
 			<div>Email {user.email}</div>
-			<Image cloudName='geekitten' public_id='kbtpnsfb2vkmzbskbp1n' />
 		</div>
 	</div>
 );
