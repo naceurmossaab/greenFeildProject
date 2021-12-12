@@ -221,37 +221,14 @@ nav {
 	grid-row-start: 1;
 	grid-row-end: 3;
 }
-.img img{
-     width : 100px;
-     height: 100px;
-}
-
 .others {
 	grid-row-start: 3;
-}
-.others img{
-     width : 50px;
-     height: 50px;
 }
 
 .details {
 	padding: 1rem 0.5rem;
 	display: flex;
 	flex-direction: column;
-}
-.details button{
-     font-weight: 500;
-     border: none;
-     outline: none;
-     background-color: transparent;
-     border: 2px solid #E5F0FF;
-     /* border-right : 1px solid #E5F0FF; */
-     margin: 0.5rem 0;
-     padding: 0.2rem 0.3rem;
-     border-radius: 5px;
-}
-.details button:hover{
-     background-color: #E5F0FF;
 }
 
 .description {
@@ -400,12 +377,6 @@ footer img {
 	width: 50px;
 }
 
-cite{
-     border-radius: 50px;
-     background-color: var(--announce-hover);
-     padding: 0.1rem 0.5rem;
-}
-
 /* Contact component */
 
 .contact-container{
@@ -547,16 +518,11 @@ cite{
 /* Post Component */
 
 .postsContainer {
-     margin: 2rem;
 	display: grid;
-     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-     gap: 0.5rem;
-     justify-content: center;
-     align-items: center;
-	/* grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: 1fr;
 	grid-column-gap: 20px;
-	grid-row-gap: 20px; */
+	grid-row-gap: 20px;
 }
 .postImg {
 	display: grid;
