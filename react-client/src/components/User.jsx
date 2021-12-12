@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import ReactDom from "react-dom";
-
 import { Image } from "cloudinary-react";
+import regions from "../../../dammyData/Regions.js";
 
 const User = (props) => {
 	let userInput =
@@ -101,10 +101,25 @@ const UserPofile = ({ user }) => (
 	<div className='profile'>
 		<img src={user.image} className='userProfilPic' />
 		<div className='userDetails'>
-			<div> <span className="name-input"> <p>{user.userName}   </p></span> </div>
-			<div> <span className="phone-input"><p>{user.phoneNumber}</p></span> </div>
-			<div> <span className="email-input"><p>{user.email}      </p></span> </div>
-			<Image cloudName='geekitten' public_id='kbtpnsfb2vkmzbskbp1n' />
+			<div>
+				{" "}
+				<span className='name-input'>
+					{" "}
+					<p>{user.userName} </p>
+				</span>{" "}
+			</div>
+			<div>
+				{" "}
+				<span className='phone-input'>
+					<p>{user.phoneNumber}</p>
+				</span>{" "}
+			</div>
+			<div>
+				{" "}
+				<span className='email-input'>
+					<p>{user.email} </p>
+				</span>{" "}
+			</div>
 		</div>
 	</div>
 );
@@ -115,6 +130,10 @@ const AddPostOwner = (props) => {
 	const [price, setprice] = useState("");
 	const [description, setdescription] = useState("");
 	const [pics, setpics] = useState([]);
+	const [cities, setCities] = useState([]);
+	const [state, setstate] = useState("");
+	const [city, setcity] = useState("");
+
 	const uploadeImage = (file) => {
 		const formData = new FormData();
 		formData.append("file", file);
@@ -123,11 +142,9 @@ const AddPostOwner = (props) => {
 			"http://api.cloudinary.com/v1_1/geekitten/image/upload",
 			formData
 		);
-		// .then(({ data }) => acc.push(data.public_id))
-		// .catch((err) => console.log(err));
-		// console.log(data.data.public_id);
-		// acc.push(data.data.public_id);
-	};
+	}; // GET http://localhost:5000/users/:userId/ownerposts/
+	// or
+	// GET http://localhost:5000/users/:userId/renterposts/
 	const handelSubmit = () => {
 		console.log("piiiiiiccsssss", pics[0]);
 		let image_id = [];
@@ -147,23 +164,69 @@ const AddPostOwner = (props) => {
 					price: price,
 					description: description,
 					pictures: imagesCloudineryIds,
+					city: city,
+					state: state,
 				};
 				console.log(post);
-				// axios
-				// 	.post("/api/addOwnerPost", post)
-				// 	.then(({ data }) => console.log(data))
-				// 	.cath((err) => console.log(err));
+				axios
+					.post(`/users/${post.userId}/ownerposts/`, post)
+					.then(({ data }) => console.log(data))
+					.cath((err) => console.log(err));
 			})
 			.catch((err) => console.log(err));
 	};
 	return (
 		<div className='inputContainer contact'>
-			<input className="adresse-input" placeholder="adresse" type='text'         onChange={(e) => setadresse(e.target.value)} />
-			<input className="room-input"    placeholder="number of rooms" type='text' onChange={(e) => setnumberOfRooms(e.target.value)} />
-			<input className="price-input"   placeholder="price"           type='text' onChange={(e) => setprice(e.target.value)} />
-			<textarea cols='34' rows='10' onChange={(e) => setdescription(e.target.value)}>
-			</textarea>
-			<input type='file' multiple onChange={(e) => setpics(e.target.files)}	/>
+			<select
+				id='state'
+				onChange={(event) => {
+					setstate(regions[event.target.value].state);
+					setCities(regions[event.target.value].cities);
+				}}
+			>
+				<option>Select the state</option>
+				{regions.map((region, index) => (
+					<option id={region.state} value={index} key={index}>
+						{region.state}
+					</option>
+				))}
+			</select>
+			<select onChange={(event) => setcity(event.target.value)}>
+				<option>Select the city</option>
+				{cities.map((city, index) => (
+					<option value={city} key={index}>
+						{city}
+					</option>
+				))}
+			</select>
+			<input
+				className='adresse-input'
+				placeholder='adresse'
+				type='text'
+				onChange={(e) => setadresse(e.target.value)}
+			/>
+			<input
+				className='room-input'
+				placeholder='number of rooms'
+				type='text'
+				onChange={(e) => setnumberOfRooms(e.target.value)}
+			/>
+			<input
+				className='price-input'
+				placeholder='price'
+				type='text'
+				onChange={(e) => setprice(e.target.value)}
+			/>
+			<textarea
+				cols='34'
+				rows='10'
+				onChange={(e) => setdescription(e.target.value)}
+			></textarea>
+			<input
+				type='file'
+				multiple
+				onChange={(e) => setpics(e.target.files)}
+			/>
 			<button onClick={handelSubmit}>Submit</button>
 		</div>
 	);
@@ -175,15 +238,20 @@ const AddPostRenter = (props) => {
 	const handelSubmit = () => {
 		let post = { userId: props.user._id, title: title, body: body };
 		console.log(post);
-		// axios
-		// 	.post("/api/addRenterPost", post)
-		// 	.then(({ data }) => console.log(data))
-		// 	.cath((err) => console.log(err));
+		axios
+			.post(`/users/${post.userId}/renterposts/`, post)
+			.then(({ data }) => console.log(data))
+			.cath((err) => console.log(err));
 	};
 	return (
 		<div className='inputContainer contact'>
 			<input type='text' onChange={(e) => settitle(e.target.value)} />
-			<textarea className="name-input" cols='34' rows='10' placeholder="title" onChange={(e) => setbody(e.target.value)}
+			<textarea
+				className='name-input'
+				cols='34'
+				rows='10'
+				placeholder='title'
+				onChange={(e) => setbody(e.target.value)}
 			></textarea>
 			<button onClick={handelSubmit}>Submit</button>
 		</div>

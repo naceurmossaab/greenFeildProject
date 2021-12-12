@@ -5,7 +5,7 @@ import dommyPosts from "../../../dammyData/data.js";
 import axios from "axios";
 
 // useEffect(() => {
-// 	axios.get("/api/posts").then(({ data }) => {
+// 	axios.get("/api/ownerposts").then(({ data }) => {
 // 		setPostsList(data);
 // 	});
 // });
@@ -15,8 +15,7 @@ const Posts = (props) => {
 
 	return (
 		<div>
-			{/* <h4> List of Posts </h4> */}
-			<div className='postsContainer'>
+			<div className='announces-container'>
 				{postsList.map((post, i) => (
 					<Post post={post} key={i} />
 				))}
