@@ -16,7 +16,7 @@ const Posts = (props) => {
 	return (
 		<div>
 			{/* <h4> List of Posts </h4> */}
-			<div className='postsContainer'>
+			<div className='announces-container'>
 				{postsList.map((post, i) => (
 					<Post post={post} key={i} />
 				))}
