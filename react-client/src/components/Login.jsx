@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
+// prettier-ignore
 const Login = () => {
     const [view, setView] = useState("signin");
     const [signup, setSignup] = useState({
@@ -37,15 +38,15 @@ const Login = () => {
         console.log("signup ", signup);
         axios.post('/auth/signup', signup)
             .then(({ data }) => {
-                setSignup({
-                    username: "",
-                    name: "",
-                    email: "",
-                    password: "",
-                    status: data
-                    //reset the signup state
-                    //status : data => "username already exist" - "account created" 
-                })
+                // setSignup({
+                //     username: "",
+                //     name: "",
+                //     email: "",
+                //     password: "",
+                //     status: data
+                //     //reset the signup state
+                //     //status : data => "username already exist" - "account created" 
+                // })
             })
             .catch((err) => console.log("Login Component => signup error : ", err));
     }
@@ -54,7 +55,7 @@ const Login = () => {
         console.log("signin ", signin);
         axios.post('/auth/signin', signin)
             .then(({ data }) => {
-                console.log("login response : ", data);
+                // console.log("login response : ", data);
                 // if (Array.isArray(data)) this.props.account(data[0]);
                 // if there is an account pass this account to global state
                 // else this.setState({ status2: data });
@@ -95,3 +96,4 @@ const Login = () => {
     );
 }
 
+export default Login;
