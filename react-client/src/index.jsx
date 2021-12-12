@@ -16,6 +16,7 @@ const App = () =>{
 	// }
 	const [view, setView] = useState('home');
 	const [connect, setConnect] = useState(false); // changed to true for testing user component
+	// const [user,setuser]=useState({});
 
 	let user = {
 		_id: "1516845168135",
@@ -30,7 +31,7 @@ const App = () =>{
 	const viewRender = () => {
 		// console.log("view render : ", this.state.view);
 		if (view === 'home') return <Home />
-		else if (view === 'feed') return <Feed />
+		else if (view === 'feed') return <Feed  user={user}/>
 		else if (view === 'announces') return <Posts />
 		else if (view === 'contact') return <Contact />
 		else if (view === 'login' && !connect) return <Login />
