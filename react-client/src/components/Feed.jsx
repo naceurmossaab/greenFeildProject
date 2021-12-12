@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Collapsible from "react-collapsible";
 import feed from "../../../dammyData/feedDAta.js";
 import axios from "axios";
-import $ from "jquery";
 import regions from '../../../dammyData/Regions.js';
 export default function Feed() {
   const [feeds, setFeeds] = useState(feed);
@@ -14,16 +13,11 @@ export default function Feed() {
   //     setFeeds(res.data);
   //   });
   // });
-  function addPost() {
-    $(".Post").toggle();
-  }
-  function writeReply() {
-    $(".show").toggle();
-  }
+ 
 
   return (
     <div>
-      <select id='state' onChange={(event)=>setCities(regions[$('#state').val()].cities)} >
+      <select id='state' onChange={(event)=>setCities(regions[event.target.value].cities)} >
       <option  >Select the state</option>
        {regions.map((region,index)=>(
          <option id={region.state} value={index} key={index}>{region.state}</option>
