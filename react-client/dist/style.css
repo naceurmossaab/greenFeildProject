@@ -102,19 +102,19 @@ nav {
 }
 
 .navbar-logout{
-     display: flex;
-     justify-content: space-evenly;
-     align-items: center;
-     cursor: default;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	cursor: default;
 }
 .navbar-logout span{
-     padding-left: 0 !important;
+	padding-left: 0 !important;
 } 
 
 .navbar-user{
-     width : 25px;
-     height: 25px;
-     border-radius: 50%;
+	width : 25px;
+	height: 25px;
+	border-radius: 50%;
 }
 
 /* Accueil component */
@@ -186,17 +186,18 @@ nav {
 	gap: 1rem;
 }
 
+
 /* Announce Component */
 /* last annouces home page style css sheet */
 
 .announce{
-     width: 350px;
-     display: flex;
-     flex-direction: column;
-     box-shadow: 2px 3px 7px hsl(0, 0%, 85%);
-     padding: 0.1rem;
-     transition: 0.5s ease-in-out;
-     border-radius: 3px;
+	width: 350px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 2px 3px 7px hsl(0, 0%, 85%);
+	padding: 0.1rem;
+	transition: 0.5s ease-in-out;
+	border-radius: 3px;
 }
 .announce:hover {
 	box-shadow: 2px 3px 7px var(--announce-hover);
@@ -219,6 +220,10 @@ nav {
 	width : 150px;
 	height: 100px;
 }
+.gallery img{
+	width: 150px;
+	height: 100px;
+}
 
 .img {
 	grid-column-start: 1;
@@ -231,7 +236,7 @@ nav {
 	grid-row-start: 3;
 }
 .others img{
-	width : 75px;
+	width: 75px;
 	height: 50px;
 }
 
@@ -241,18 +246,18 @@ nav {
 	flex-direction: column;
 }
 .details button{
-     font-weight: 500;
-     border: none;
-     outline: none;
-     background-color: transparent;
-     border: 2px solid #E5F0FF;
-     /* border-right : 1px solid #E5F0FF; */
-     margin: 0.5rem 0;
-     padding: 0.2rem 0.3rem;
-     border-radius: 5px;
+	font-weight: 500;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	border: 2px solid #E5F0FF;
+	/* border-right : 1px solid #E5F0FF; */
+	margin: 0.5rem 0;
+	padding: 0.2rem 0.3rem;
+	border-radius: 5px;
 }
 .details button:hover{
-     background-color: #E5F0FF;
+	background-color: #E5F0FF;
 }
 
 .description {
@@ -297,10 +302,10 @@ nav {
 /* Testmonial Component */
 
 .testimonial{
-     position: relative;
-     margin: 2rem 0;
-     border: 1px dotted var(--navbar-links-hover);
-     border-radius: 20px;
+	position: relative;
+	margin: 2rem 0;
+	border: 1px dotted var(--navbar-links-hover);
+	border-radius: 20px;
 }
 
 #slider-container {
@@ -312,13 +317,13 @@ nav {
 }
 
 #testimonials {
-     position: relative;
-     justify-content: center;
-     margin: 0 auto;
-     overflow: hidden;
-     width: 600px;
-     height: 250px;
-     /* border: 1px solid green; */
+	position: relative;
+	justify-content: center;
+	margin: 0 auto;
+	overflow: hidden;
+	width: 600px;
+	height: 250px;
+	/* border: 1px solid green; */
 }
 
 .single-testimonial p {
@@ -334,11 +339,11 @@ figure {
 }
 
 blockquote {
-     width: 25%;
-     margin-top: 0.1rem;
-     float: left;
-     padding: 1em;
-     
+	width: 25%;
+	margin-top: 0.1rem;
+	float: left;
+	padding: 1em;
+	
 }
 
 @-webkit-keyframes slider {
@@ -404,71 +409,71 @@ footer img {
 /* Contact component */
 
 .contact-container{
-     display: flex;
-     justify-content: left;
-     margin-top: 4rem;
-     margin-left: 5rem;
+	display: flex;
+	justify-content: left;
+	margin-top: 4rem;
+	margin-left: 5rem;
 }
 
 .contact{
-     display: flex;
-     flex-direction: column;
-     margin: 3rem;
-     width: 50%;
+	display: flex;
+	flex-direction: column;
+	margin: 3rem;
+	width: 50%;
 }
 .contact input{
-     font-size: 17px;
-     width: 350px;
-     height: 40px;
-     outline: none;
-     padding-left: 2.5rem;
-     margin: 0.5rem 0;
-     background-color: var(--navbar-bg);
-     border: none;
-     align-items: center;
-     border-radius: 7px;
-     
+	font-size: 17px;
+	width: 350px;
+	height: 40px;
+	outline: none;
+	padding-left: 2.5rem;
+	margin: 0.5rem 0;
+	background-color: var(--navbar-bg);
+	border: none;
+	align-items: center;
+	border-radius: 7px;
+	
 }
 .contact textarea{
-     font-size: 17px;
-     margin : 0.5rem 0;
-     padding: 0.5rem;
-     background-color: var(--navbar-bg);
-     border: none;
-     outline: none;
-     border-radius: 7px;
+	font-size: 17px;
+	margin : 0.5rem 0;
+	padding: 0.5rem;
+	background-color: var(--navbar-bg);
+	border: none;
+	outline: none;
+	border-radius: 7px;
 }
 .contact button{
-     margin: 0.5rem 0;
-     padding: 0 0.5rem;
-     font-size: 20px;
-     width: 100px;
-     height: 40px;
-     border: none;
-     color: #fff;
-     background-color: var(--search-btn);
+	margin: 0.5rem 0;
+	padding: 0 0.5rem;
+	font-size: 20px;
+	width: 100px;
+	height: 40px;
+	border: none;
+	color: #fff;
+	background-color: var(--search-btn);
 }
 .contact button:hover{
-     background-color: var(--search-btn-hover);
+	background-color: var(--search-btn-hover);
 }
 
 .right-div{
-     font-weight: 600;
-     color: #fff;
-     font-size: 20px;
-     top: 7rem;
-     right: 0;
-     position: absolute;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     padding: 10rem 2rem;
-     background-image: url('https://source.unsplash.com/700x300/?mail');
-     background-repeat: no-repeat;
-     background-size: cover;
-     width: 35vw;
-     height: 75vh;
-     clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+	font-weight: 600;
+	color: #fff;
+	font-size: 20px;
+	top: 7rem;
+	right: 0;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10rem 2rem;
+	background-image: url('https://source.unsplash.com/700x300/?mail');
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 35vw;
+	height: 75vh;
+	clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
 }
 
 /* Login Component */
@@ -501,16 +506,16 @@ footer img {
 		no-repeat scroll;
 }
 .adresse-input{
-     background: url("https://img.icons8.com/ios-filled/35/000000/address--v1.png") no-repeat scroll;
+	background: url("https://img.icons8.com/ios-filled/35/000000/address--v1.png") no-repeat scroll;
 }
 .room-input{
-     background: url("https://img.icons8.com/ios/35/000000/empty-bed.png") no-repeat scroll;
+	background: url("https://img.icons8.com/ios/35/000000/empty-bed.png") no-repeat scroll;
 }
 .price-input{
-     background: url("https://img.icons8.com/ios/35/000000/expensive-2--v1.png") no-repeat scroll;
+	background: url("https://img.icons8.com/ios/35/000000/expensive-2--v1.png") no-repeat scroll;
 }
 .phone-input{
-     background: url("https://img.icons8.com/ios/35/000000/apple-phone.png") no-repeat scroll;
+	background: url("https://img.icons8.com/ios/35/000000/apple-phone.png") no-repeat scroll;
 }
 
 
@@ -593,28 +598,28 @@ footer img {
 }
 
 .profile{
-     width: 350px;
-     display: flex;
-     flex-direction: column;
-     border-right : 1px solid #888;
-     padding: 0 2rem;
+	width: 350px;
+	display: flex;
+	flex-direction: column;
+	border-right : 1px solid #888;
+	padding: 0 2rem;
 }
 
 .userDetails div{
-     display: flex;
-     align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .userDetails span{
-     padding: 0.5rem;
-     margin: 0.2rem 0;
+	padding: 0.5rem;
+	margin: 0.2rem 0;
 }
 .userDetails span p{
-     padding-left: 2rem;
+	padding-left: 2rem;
 }
 
 .userProfilPic {
-     margin: 1rem 0;
+	margin: 1rem 0;
 	height: 180px;
 	width : 180px;
 	border-radius: 50%;
@@ -647,7 +652,7 @@ footer img {
 .creat-post{
 	display: flex;
 	flex-direction: column;
-     justify-content: start;
+	justify-content: start;
 }
 
 .creat-post-head{
@@ -663,35 +668,147 @@ footer img {
 	margin: 0 0.5rem;
 }
 .creat-post-head button{
-     margin : 0 0.5rem;
-     padding: 0 0.5rem;
-     font-size: 18px;
-     width: 170px;
-     height: 35px;
-     border: none;
-     color: #fff;
-     background-color: var(--search-btn);
+	margin: 0 0.5rem;
+	 padding: 0 0.5rem;
+	font-size: 18px;
+	width: 170px;
+	height: 35px;
+	border: none;
+	color: #fff;
+	background-color: var(--search-btn);
 }
 .creat-post-head button:hover{
-     background-color: var(--search-btn-hover);
+	background-color: var(--search-btn-hover);
+}
+.creat-post-head button:last-child{
+	margin-left: 15rem;
 }
 
 .creat-post-body{
 	display: flex;
-     flex-direction: column;
-     width: 50%;
+	flex-direction: column;
+	width: 50%;
 	margin: 0 0.5rem !important;
 }
-.creat-post-body input{
-	width: 600px;
+.creat-post-body select{
+	width : 300px;
+	height: 35px;
+	font-size: 18px;
+	margin: 0 0.5rem;
+}
+.creat-post-body-contact{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 .creat-post-body textarea{
+	margin-top: 0.5rem;
 	width: 600px;
 	height: 100px;
+}
+.creat-post-body button{
+	margin: 1rem 0;
+	margin-left: 27rem;
+	 padding: 0 0.5rem;
+	font-size: 18px;
+	width: 170px;
+	height: 35px;
+	border: none;
+	background-color: var(--navbar-bg);
+}
+.creat-post-body button:hover{
+	border: 1px solid var(--search-btn);
+
 }
 
 .feed-container{
 	display: flex;
 	flex-direction: column;
-     justify-content: start;
+	justify-content: start;
+}
+
+.feed-content{
+	width: 90%;
+	margin: 1rem 0;
+	padding: 1rem;
+}
+
+.feed-user{
+	display: flex;
+	align-items: center;
+}
+.feed-user img{
+	border-radius: 50%;
+}
+
+.comment-input input{
+	width : 300px;
+	height: 25px;
+	font-size: 16px;
+	margin: 0 0.5rem;
+}
+.comment-input button{
+	margin: 1rem 0;
+	 padding: 0 0.5rem;
+	font-size: 16px;
+	width: 170px;
+	height: 25px;
+	border: none;
+	background-color: var(--navbar-bg);
+}
+.comment-input button:hover{
+	border: 1px solid var(--search-btn);
+
+}
+
+.replies-feed p{
+	font-size: 15px;
+	font-weight: 500;
+}
+#modele {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.model-style {
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.model-close {
+    position: absolute;
+    top: 8%;
+    left: 75%;
+}
+.model-close img {
+    height: 20px;
+    width: 20px;
+}
+.currentPic-index {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    font-weight: 700;
+    color: #fff;
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+}
+.arrow-right {
+    /* position: absolute; */
+    right: 23.3%;
 }

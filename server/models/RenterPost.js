@@ -2,11 +2,34 @@ const mongoose = require("mongoose");
 
 const renterPostSchema = mongoose.Schema(
     {
-        label: { type: String, default: "Not Specified" },
-        description: { type: String, default: "Not Specified" },
+        content: {
+            type: String,
+            default: "Not Specified",
+        },
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
+        },
+        comments: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Comment",
+            },
+        ],
+        state: {
+            type: String,
+        },
+        city: {
+            type: String,
+        },
+        createdAt: {
+            type: Date,
+            immutable: true,
+            default: () => Date.now(),
+        },
+        updatedAt: {
+            type: Date,
+            default: () => Date.now(),
         },
     },
     { versionKey: false } // to not save the __v attribute ... // Source: https://mongoosejs.com/docs/guide.html#versionKey
