@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+// prettier-ignore
 const Login = () => {
 	const [view, setView] = useState("signin");
 	const [signup, setSignup] = useState({
@@ -33,41 +34,35 @@ const Login = () => {
 		setSignin(obj);
 	};
 
-	const signupFN = () => {
-		console.log("signup ", signup);
-		axios
-			.post("/auth/signup", signup)
-			.then(({ data }) => {
-				setSignup({
-					username: "",
-					name: "",
-					email: "",
-					password: "",
-					status: data,
-					//reset the signup state
-					//status : data => "username already exist" - "account created"
-				});
-			})
-			.catch((err) =>
-				console.log("Login Component => signup error : ", err)
-			);
-	};
+    const signupFN = () => {
+        console.log("signup ", signup);
+        axios.post('/auth/signup', signup)
+            .then(({ data }) => {
+                // setSignup({
+                //     username: "",
+                //     name: "",
+                //     email: "",
+                //     password: "",
+                //     status: data
+                //     //reset the signup state
+                //     //status : data => "username already exist" - "account created" 
+                // })
+            })
+            .catch((err) => console.log("Login Component => signup error : ", err));
+    }
 
-	const signinFN = () => {
-		console.log("signin ", signin);
-		axios
-			.post("/auth/signin", signin)
-			.then(({ data }) => {
-				console.log("login response : ", data);
-				// if (Array.isArray(data)) this.props.account(data[0]);
-				// if there is an account pass this account to global state
-				// else this.setState({ status2: data });
-				//status : data => "username doesn't exist" - "wrrong username/password"
-			})
-			.catch((err) =>
-				console.log("Authentification => signin error : ", err)
-			);
-	};
+    const signinFN = () => {
+        console.log("signin ", signin);
+        axios.post('/auth/signin', signin)
+            .then(({ data }) => {
+                // console.log("login response : ", data);
+                // if (Array.isArray(data)) this.props.account(data[0]);
+                // if there is an account pass this account to global state
+                // else this.setState({ status2: data });
+                //status : data => "username doesn't exist" - "wrrong username/password"
+            })
+            .catch((err) => console.log("Authentification => signin error : ", err));
+    }
 
 	return (
 		<div className='login'>

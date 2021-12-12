@@ -37,4 +37,5 @@ module.exports = {
             cookieKey: "WzA9bW8Fwb0XwnAp1TG4dHx3R3wkgTx3gX0hIXK2YBPkOdyDU4vXAR",
         },
     },
+    secret: process.env.SECRET,
 };
