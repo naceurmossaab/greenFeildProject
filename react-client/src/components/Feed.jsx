@@ -7,12 +7,13 @@ import regions from '../../../dammyData/Regions.js';
 export default function Feed() {
   const [feeds, setFeeds] = useState(feed);
   const [txt, setReply] = useState("");
+  const [cities,setCities] = useState([])
 
-  useEffect(() => {
-    axios.get("/feeds").then((res) => {
-      setFeeds(res.data);
-    });
-  });
+  // useEffect(() => {
+  //   axios.get("/feeds").then((res) => {
+  //     setFeeds(res.data);
+  //   });
+  // });
   function addPost() {
     $(".Post").toggle();
   }
@@ -22,17 +23,18 @@ export default function Feed() {
 
   return (
     <div>
-      <select id='state'>
+      <select id='state' onChange={(event)=>setCities(regions[$('#state').val()].cities)}>
+      <option value='...' >...</option>
        {regions.map((region,index)=>(
-         <option id={region.state} value={region.state} key={index}>{region.state}</option>
+         <option id={region.state} value={index} key={index}>{region.state}</option>
        ))
        }
       </select>
-      <select>
-        { 
-        regions.filter(())
-        
-        }
+      <select >
+      {cities.map((city,index)=>(
+         <option  value={city} key={index}>{city}</option>
+       ))
+       }
       </select>
       
       <button onClick={() => addPost()}>Create a post +</button>
