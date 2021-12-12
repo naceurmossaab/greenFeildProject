@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import Home from './components/Home.jsx';
-import Feed from './components/Feed.jsx';
-import Announces from './components/Announces.jsx';
-import Contact from './components/Contact.jsx';
-import Login from './components/Login.jsx';
-import User from './components/User.jsx';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import axios from "axios";
+import Home from "./components/Home.jsx";
+import Feed from "./components/Feed.jsx";
+import Announces from "./components/Announces.jsx";
+import Contact from "./components/Contact.jsx";
+import Login from "./components/Login.jsx";
+import User from "./components/User.jsx";
 
+// prettier-ignore
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -72,4 +73,4 @@ class App extends Component {
 	}
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById("app"));
