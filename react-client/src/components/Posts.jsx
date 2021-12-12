@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Post from "./Post.jsx";
 import dommyPosts from "../../../dammyData/data.js";
+import axios from "axios";
 
-const Posts = () => {
+// useEffect(() => {
+// 	axios.get("/api/posts").then(({ data }) => {
+// 		setPostsList(data);
+// 	});
+// });
+
+const Posts = (props) => {
 	const [postsList, setPostsList] = useState(dommyPosts);
 
 	return (

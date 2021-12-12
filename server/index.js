@@ -42,6 +42,7 @@ app.use(
     })
 );
 
+
 // initialize passport to avoid: TypeError: req.logIn is not a function
 app.use(passport.initialize());
 app.use(passport.session()); // important too if we want to make the passport.deserializeUser() execute the callback function
@@ -83,3 +84,4 @@ app.use((err, req, res, next) => {
 app.listen(port, function () {
     console.log(`listening on port http://localhost:${port} !`);
 });
+
