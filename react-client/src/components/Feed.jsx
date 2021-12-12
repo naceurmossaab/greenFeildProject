@@ -4,22 +4,14 @@ import feed from "../../../dammyData/feedDAta.js";
 import axios from "axios";
 import $ from "jquery";
 import regions from "../../../dammyData/Regions.js";
-export default function Feed() {
-	const [feeds, setFeeds] = useState(feed);
-	const [txt, setReply] = useState("");
-	const [cities, setCities] = useState([]);
 
-	// useEffect(() => {
-	//   axios.get("/feeds").then((res) => {
-	//     setFeeds(res.data);
-	//   });
-	// });
-	function addPost() {
-		$(".Post").toggle();
-	}
-	function writeReply() {
-		$(".show").toggle();
-	}
+export default function Feed(props) {
+  const [feeds, setFeeds] = useState(feed);
+  const [txt, setReply] = useState("");
+  const[newpost,setpost]=useState({content:txt,user:props.user});
+  const[userselectedpost,setselectedpost]=useState('')
+  const [cities, setCities] = useState([]);
+  const [Cities, setcities] = useState([]);
 
   useEffect(() => {
     axios.get("").then((res) => {
